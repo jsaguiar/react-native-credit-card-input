@@ -106,7 +106,7 @@ export default class LiteCreditCardInput extends Component {
       inputStyle, validColor, invalidColor, placeholderColor,
       placeholders, values, status,
       onFocus, onChange, onBecomeEmpty, onBecomeValid,
-      additionalInputsProps,
+      additionalInputsProps, focused
     } = this.props;
 
     return {
@@ -117,6 +117,8 @@ export default class LiteCreditCardInput extends Component {
       placeholder: placeholders[field],
       value: values[field],
       status: status[field],
+      shouldHide: field === "number",
+      isFocused: this.props.isFocused && focused === field,
 
       onFocus, onChange, onBecomeEmpty, onBecomeValid,
       additionalInputProps: additionalInputsProps[field],

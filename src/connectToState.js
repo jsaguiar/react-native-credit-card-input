@@ -101,7 +101,9 @@ export default function connectToState(CreditCardInput) {
         this.focus(nextField)
       }
       else {
-        this.props.onEndReached && this.props.onEndReached()
+        this.setState({ focused: "" },
+          () => this.props.onEndReached && this.props.onEndReached()
+        )
       }
     };
 
