@@ -31,15 +31,15 @@ export default function connectToState(CreditCardInput) {
 
     static defaultProps = {
       autoFocus: false,
-      onChange: () => {},
-      onFocus: () => {},
+      onChange: () => { },
+      onFocus: () => { },
       requiresName: false,
       requiresCVC: true,
       requiresPostalCode: false,
       validatePostalCode: (postalCode = "") => {
         return postalCode.match(/^\d{6}$/) ? "valid" :
-               postalCode.length > 6 ? "invalid" :
-               "incomplete";
+          postalCode.length > 6 ? "invalid" :
+            "incomplete";
       },
     };
 
@@ -97,7 +97,12 @@ export default function connectToState(CreditCardInput) {
       const displayedFields = this._displayedFields();
       const fieldIndex = displayedFields.indexOf(field);
       const nextField = displayedFields[fieldIndex + 1];
-      if (nextField) this.focus(nextField);
+      if (nextField) {
+        this.focus(nextField)
+      }
+      else {
+        this.props.onEndReached && this.props.onEndReached()
+      }
     };
 
     _change = (field, value) => {
