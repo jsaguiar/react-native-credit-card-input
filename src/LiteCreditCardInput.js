@@ -98,6 +98,10 @@ export default class LiteCreditCardInput extends Component {
   _focus = field => {
     if (!field) return;
     this.refs[field].focus();
+    if (this.props.editable === false) {
+      this.props.onFocus(field)
+    }
+
     LayoutAnimation.easeInEaseOut();
   }
 
@@ -106,7 +110,7 @@ export default class LiteCreditCardInput extends Component {
       inputStyle, validColor, invalidColor, placeholderColor,
       placeholders, values, status,
       onFocus, onChange, onBecomeEmpty, onBecomeValid,
-      additionalInputsProps, focused
+      additionalInputsProps, focused, editable = true
     } = this.props;
 
     return {
@@ -122,6 +126,7 @@ export default class LiteCreditCardInput extends Component {
 
       onFocus, onChange, onBecomeEmpty, onBecomeValid,
       additionalInputProps: additionalInputsProps[field],
+      editable: editable
     };
   };
 

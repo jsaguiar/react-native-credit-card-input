@@ -61,7 +61,7 @@ export default class CCInput extends Component {
     if (status !== "valid" && newStatus === "valid") onBecomeValid(field);
   };
 
-  focus = () => this.refs.input.focus();
+  focus = () => { this.refs.input.focus() };
 
   _onFocus = () => this.props.onFocus(this.props.field);
   _onChange = value => this.props.onChange(this.props.field, value);
@@ -70,7 +70,7 @@ export default class CCInput extends Component {
     const { label, value, placeholder, status, keyboardType,
       containerStyle, inputStyle, labelStyle,
       validColor, invalidColor, placeholderColor, isFocused,
-      additionalInputProps, shouldHide } = this.props;
+      additionalInputProps, shouldHide, editable = true } = this.props;
 
     return (
       <TouchableOpacity onPress={this.focus}
@@ -94,7 +94,9 @@ export default class CCInput extends Component {
             placeholder={placeholder}
             value={shouldHide && !isFocused ? value.replace(/[^" "](?=.{4,}$)/g, '*') : value}
             onFocus={this._onFocus}
-            onChangeText={this._onChange} />
+            onChangeText={this._onChange}
+            editable={editable}
+          />
         </View>
       </TouchableOpacity>
     );
